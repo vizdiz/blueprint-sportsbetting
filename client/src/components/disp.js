@@ -54,7 +54,9 @@ const Date = (props) => {
 }
 
 const Display = (props) => {
-
+    let year = props.date.slice(0,4);
+    let month = props.date.slice(5,7);
+    let day = props.date.slice(8,10);
     return (
         <div>
             <div className='teams-display'>
@@ -63,7 +65,7 @@ const Display = (props) => {
                 <Team teamID = {props.team2} />
             </div>
             <div className='date-display'>
-                <Date month={props.month} day={props.day} year={props.year} />
+                <Date month={month} day={day} year={year} />
             </div>
         </div>
 

@@ -1,4 +1,4 @@
-const API_KEY = "8097ad8b9eb665d99d8e442839cce0cc"
+//const API_KEY = "d23bde31ac8d6aa6e532fc75fe544aae"
 
 export function getRandomGame() {
   const year = 2023 // Math.floor(Math.random() * 7 + 2015);
@@ -12,7 +12,7 @@ export function getRandomGame() {
     .then((response) => response.json())
     .then((json) => {
       const response = json["response"];
-      // console.log(response)
+      console.log(response)
       let games = []
       for (let i = 0; i < response.length; i ++) {
         if (response[i]["game"]["status"]["short"] === "FT") {

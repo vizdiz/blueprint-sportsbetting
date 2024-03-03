@@ -3,7 +3,7 @@ import { GoogleOAuthProvider, GoogleLogin, googleLogout } from "@react-oauth/goo
 
 import "../../utilities.css";
 import "./Skeleton.css";
-import Input from "../modules/input";
+//import Input from "../modules/input";
 import { getBets, getRandomGame } from "../../sports_bet_util";
 import Display from "../disp.js";
 
@@ -11,7 +11,7 @@ import Display from "../disp.js";
 const GOOGLE_CLIENT_ID = "575558179875-rgo4ik0dami2mu3mb48gh9s761gpf0s6.apps.googleusercontent.com";
 
 const Skeleton = ({ userId, handleLogin, handleLogout }) => {
-  const [game, setGame] = useState({});
+  const [game, setGame] = useState(undefined);
   getRandomGame()
     .then((gameJSON) => {
       console.log(gameJSON)
@@ -34,7 +34,7 @@ const Skeleton = ({ userId, handleLogin, handleLogout }) => {
       ) : (
         <GoogleLogin onSuccess={handleLogin} onError={(err) => console.log(err)} />
       )}
-      <Team num = {133} />
+      <Display team1={game ? game["teams"]["home"]["id"] : 0} team2={game ? game["teams"]["away"]["id"] : 0} date={game ? game["date"] : "0000-00-00"}/>
     </GoogleOAuthProvider>
   );
 };
