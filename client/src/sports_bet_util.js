@@ -1,3 +1,5 @@
+const API_KEY = "9f18683bd23d36897c490739f4780e16"
+
 export function getRandomGame() {
   const year = 2023 // Math.floor(Math.random() * 7 + 2015);
   const url = `https://v1.basketball.api-sports.io/odds?league=12&season=${year + "-" + (year + 1)}`
@@ -24,7 +26,7 @@ export function getBets(gameId) {
   return fetch(url, {
     method: "GET",
     headers: {
-      "x-rapidapi-key": "8097ad8b9eb665d99d8e442839cce0cc"
+      "x-rapidapi-key": API_KEY
     }
   })
     .then((response) => response.json())

@@ -44,6 +44,7 @@ router.post("/initsocket", (req, res) => {
 // |------------------------------|
 
 // anything else falls to this "not found" case
+
 router.all("*", (req, res) => {
   console.log(`API route not found: ${req.method} ${req.url}`);
   res.status(404).send({ msg: "API route not found" });
@@ -51,13 +52,12 @@ router.all("*", (req, res) => {
 
 module.exports = router;
 
-
 /*
 var https = require('follow-redirects').https;
 var fs = require('fs');
 apis = ['8097ad8b9eb665d99d8e442839cce0cc',];
-//NBA ID: 12
-//NBA Teams ID: 132-161
+// NBA ID: 12
+// NBA Teams ID: 132-161
 var options = {
   'method': 'GET',
   'hostname': 'v1.basketball.api-sports.io',
