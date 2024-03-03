@@ -56,7 +56,8 @@ module.exports = router;
 var https = require('follow-redirects').https;
 var fs = require('fs');
 apis = ['8097ad8b9eb665d99d8e442839cce0cc',];
-
+//NBA ID: 12
+//NBA Teams ID: 132-161
 var options = {
   'method': 'GET',
   'hostname': 'v1.basketball.api-sports.io',
