@@ -3,11 +3,20 @@ import { GoogleOAuthProvider, GoogleLogin, googleLogout } from "@react-oauth/goo
 
 import "../../utilities.css";
 import "./Skeleton.css";
+import { getRandomSeason } from "../../utilities";
 
 //TODO: REPLACE WITH YOUR OWN CLIENT_ID
 const GOOGLE_CLIENT_ID = "575558179875-rgo4ik0dami2mu3mb48gh9s761gpf0s6.apps.googleusercontent.com";
 
 const Skeleton = ({ userId, handleLogin, handleLogout }) => {
+  getRandomSeason()
+    .then((json) => {
+      const response = json["response"];
+      const random = Math.floor(Math.random() * response.length);
+      const game = response[random];
+      console.log(game["teams"]["home"]["name"] + " vs " + game["teams"]["away"]["name"]);
+    })
+
   return (
     <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
       {userId ? (
