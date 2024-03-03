@@ -50,3 +50,40 @@ router.all("*", (req, res) => {
 });
 
 module.exports = router;
+
+
+/*
+var https = require('follow-redirects').https;
+var fs = require('fs');
+apis = ['8097ad8b9eb665d99d8e442839cce0cc',];
+
+var options = {
+  'method': 'GET',
+  'hostname': 'v1.basketball.api-sports.io',
+  'path': '/leagues',
+  'headers': {
+    'x-rapidapi-key': 'apis[0]',
+    'x-rapidapi-host': 'v1.basketball.api-sports.io'
+  },
+  'maxRedirects': 20
+};
+
+var req = https.request(options, function (res) {
+  var chunks = [];
+
+  res.on("data", function (chunk) {
+    chunks.push(chunk);
+  });
+
+  res.on("end", function (chunk) {
+    var body = Buffer.concat(chunks);
+    console.log(body.toString());
+  });
+
+  res.on("error", function (error) {
+    console.error(error);
+  });
+});
+
+req.end();
+*/
