@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+<link rel="stylesheet" href="../DisplayStyles.css" />
 
 const Team = (props) => {
     let img = 'https://media.api-sports.io/basketball/teams/'+props.num+'.png'
@@ -35,12 +36,32 @@ const Team = (props) => {
         "Washington Wizards"]
     return (
         <div className = "Team">
-            <h5>teams[props.num - 132]</h5>
-            <img src={img.default} alt="image not found"/>
+            <h2>{teams[props.num - 132]}</h2>
+            <img src={img} alt="image not found"/>
         </div>
 
 
     )
 }
 
-export default Team
+const Date = (props) => {
+    return (
+        <div>
+            <h5>{props.month}/{props.day}/{props.year}</h5>
+        </div>
+    )
+}
+
+const Display = (props) => {
+
+    return (
+        <div>
+            <Team num = {props.team1} />
+            <Date month={props.month} day={props.day} year={props.year} />
+            <Team num = {props.team2} />
+        </div>
+
+    )
+}
+
+export default Display;
