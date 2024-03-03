@@ -12,13 +12,15 @@ export function getRandomGame() {
     .then((response) => response.json())
     .then((json) => {
       const response = json["response"];
-      // console.log(response);
-      const random = Math.floor(Math.random() * response.length);
-      return response[random]["game"];
-      // console.log(game["teams"]["home"]["name"] + " vs " + game["teams"]["away"]["name"]);
-    })
-    .catch((error) => {
-      throw `GET request to "${url}" failed with error:\n${error}`
+      // console.log(response)
+      let games = []
+      for (let i = 0; i < response.length; i ++) {
+        if (response[i]["game"]["status"]["short"] === "FT") {
+          games.push(response[i]);
+        }
+      }
+      const random = Math.floor(Math.random() * games.length);
+      return games[random]["game"];
     })
 }
 
@@ -69,6 +71,49 @@ export function getBets(gameId) {
 // ]
 
 export function calculateWinnings(game, odds, bets) {
-
+  let away = game["scores"]["away"]; // Dictionary of home scores for game(quarters and overtime)
+  let home = game["scores"]["home"]; // Dictionary of away scores for game(quarters and overtime)
+  let oddsChoice;
+  let value;
+  let winnings = 0
+  for (let bet in bets)
+  {
+    let score = 0;
+    winnings -= bet[2]
+    oddsChoice = odds[bets[0]][bet[1]];//Dictionary with odds and value
+    let arr = oddsChoice["value"].split(" ");
+    switch(bet[0])
+    {
+      case 23:
+        score = home["quarter_1"]
+        break;
+      case 52:
+        score = home["quarter_2"]
+        break;
+      case 54:
+        score = home["quarter_3"]
+        break;
+      case 56:
+        score = home["quarter_4"]
+        break;
+      case 24:
+        score = away["quarter_1"]
+        break;
+      case 53:
+        score = away["quarter_2"]
+        break;
+      case 55:
+        score = away["quarter_3"]
+        break;
+      case 57:
+        score = away["quarter_4"]
+        break;
+    }
+    if (arr[0] === "O" ? score > arr[1] : score < arr[1])
+    {
+      winning += arr[1] * bet[2];
+    }
+    
+  }
+  return winnings;
 }
-
