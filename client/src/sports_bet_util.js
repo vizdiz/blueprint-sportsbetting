@@ -1,4 +1,4 @@
-const API_KEY = "1c17793a176c39bc954c5c0c70e8e4c9"
+const API_KEY = "8097ad8b9eb665d99d8e442839cce0cc"
 
 export function getRandomGame() {
   const year = 2023 // Math.floor(Math.random() * 7 + 2015);
@@ -14,9 +14,8 @@ export function getRandomGame() {
       const response = json["response"];
       // console.log(response);
       const random = Math.floor(Math.random() * response.length);
-      const game = response[random]["game"];
+      return response[random]["game"];
       // console.log(game["teams"]["home"]["name"] + " vs " + game["teams"]["away"]["name"]);
-      return game["id"]
     })
     .catch((error) => {
       throw `GET request to "${url}" failed with error:\n${error}`
@@ -37,16 +36,23 @@ export function getBets(gameId) {
       const bookmakers = json["response"][0]["bookmakers"];
       for (let i = 0; i < bookmakers.length; i ++) {
         if (bookmakers[i]["name"] === "Marathon Bet") {
-          console.log("Found Marathon bet")
+          // console.log("Found Marathon bet")
           const bets = bookmakers[i]["bets"];
           let targetBetNames = [
-            "Home/Away",
-            "Highest Scoring Quarter"
+            2, // Home/Away
+            23, // Home Team Total Points (1st Quarter)
+            52, // Home Team Total Points (2nd Quarter)
+            54, // Home Team Total Points (3rd Quarter)
+            56, // Home Team Total Points (4th Quarter)
+            24, // Away Team Total Points (1st Quarter)
+            53, // Away Team Total Points (2nd Quarter)
+            55, // Away Team Total Points (3rd Quarter)
+            57, // Away Team Total Points (4th Quarter)
           ]
           let targetBets = {}
           for (let j = 0; j < bets.length; j ++) {
-            if (targetBetNames.includes(bets[j]["name"])) {
-              targetBets[bets[j]["name"]] = bets[j];
+            if (targetBetNames.includes(bets[j]["id"])) {
+              targetBets[bets[j]["id"]] = bets[j]["values"];
             }
           }
           return targetBets
@@ -55,3 +61,14 @@ export function getBets(gameId) {
       return {}
     })
 }
+
+// targetBet, targetChoice, money
+// let bets = [
+//   [23, 0, 10],
+//   ...
+// ]
+
+export function calculateWinnings(game, odds, bets) {
+
+}
+

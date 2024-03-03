@@ -10,9 +10,9 @@ const GOOGLE_CLIENT_ID = "575558179875-rgo4ik0dami2mu3mb48gh9s761gpf0s6.apps.goo
 
 const Skeleton = ({ userId, handleLogin, handleLogout }) => {
   getRandomGame()
-    .then((id) => {
-      // console.log(id);
-      getBets(id)
+    .then((game) => {
+      console.log(game)
+      getBets(game["id"])
         .then((bets) => console.log(bets))
     })
 
