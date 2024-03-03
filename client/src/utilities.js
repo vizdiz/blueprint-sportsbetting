@@ -62,17 +62,4 @@ export function post(endpoint, params = {}) {
     });
 }
 
-export function getRandomSeason() {
-  const year = Math.floor(Math.random() * 7 + 2015);
 
-  return fetch(`https://v1.basketball.api-sports.io/games?league=12&season=${year + "-" + (year+1)}`, {
-    method: "GET",
-    headers: {
-      "x-rapidapi-key": "8097ad8b9eb665d99d8e442839cce0cc"
-    }
-  })
-    .then((response) => response.json())
-    .catch((error) => {
-      throw `GET request to "https://v1.basketball.api-sports.io/games?league=12&season=${year + "-" + (year+1)}" failed with error:\n${error}`
-    })
-}
