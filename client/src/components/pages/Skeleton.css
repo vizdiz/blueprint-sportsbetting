@@ -1,1 +1,10 @@
-/* Fill me in :) */
+.NavBar-container {
+    padding: var(--s) var(--m);
+    background-color: #e66465;
+    border-radius: 2px;
+    border: #000000 2px solid;
+}
+
+.NavBar-login {
+    background-color: azure;
+}

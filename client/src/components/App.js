@@ -44,22 +44,20 @@ const App = () => {
 
   return (
     <Routes>
-      <Route>
-        <Input />
-      </Route>
+      <Route
+        path="/"
+        element={
+          <Skeleton
+            path="/"
+            handleLogin={handleLogin}
+            handleLogout={handleLogout}
+            userId={userId}
+          />
+        }
+      />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );
 };
-
-// path="/"
-// element={
-//   <Skeleton
-//     path="/"
-//     handleLogin={handleLogin}
-//     handleLogout={handleLogout}
-//     userId={userId}
-//   />
-// }
 
 export default App;
