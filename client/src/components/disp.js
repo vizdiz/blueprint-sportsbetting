@@ -1,8 +1,7 @@
 import React, {useState} from 'react';
-<link rel="stylesheet" href="../DisplayStyles.css" />
+import './disp.css'
 
 const Team = (props) => {
-    let img = 'https://media.api-sports.io/basketball/teams/'+props.num+'.png'
     const teams = [
         "Atlanta Hawks",
         "Boston Celtics",
@@ -34,9 +33,11 @@ const Team = (props) => {
         "Toronto Raptors",
         "Utah Jazz",
         "Washington Wizards"]
+    let img = 'https://media.api-sports.io/basketball/teams/'+props.teamID+'.png'
+    
     return (
-        <div className = "Team">
-            <h2>{teams[props.num - 132]}</h2>
+        <div className = "team-display">
+            <p>{teams[props.teamID - 132]}</p>
             <img src={img} alt="image not found"/>
         </div>
 
@@ -47,7 +48,7 @@ const Team = (props) => {
 const Date = (props) => {
     return (
         <div>
-            <h5>{props.month}/{props.day}/{props.year}</h5>
+            <p text-align='center'>{props.month}/{props.day}/{props.year}</p>
         </div>
     )
 }
@@ -56,9 +57,14 @@ const Display = (props) => {
 
     return (
         <div>
-            <Team num = {props.team1} />
-            <Date month={props.month} day={props.day} year={props.year} />
-            <Team num = {props.team2} />
+            <div className='teams-display'>
+                <Team teamID = {props.team1} />
+                <p>VS.</p>
+                <Team teamID = {props.team2} />
+            </div>
+            <div className='date-display'>
+                <Date month={props.month} day={props.day} year={props.year} />
+            </div>
         </div>
 
     )
