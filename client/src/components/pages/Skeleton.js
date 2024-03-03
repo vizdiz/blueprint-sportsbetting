@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { GoogleOAuthProvider, GoogleLogin, googleLogout } from "@react-oauth/google";
 
 import "../../utilities.css";
@@ -10,10 +10,12 @@ import Display from "../disp.js";
 const GOOGLE_CLIENT_ID = "575558179875-rgo4ik0dami2mu3mb48gh9s761gpf0s6.apps.googleusercontent.com";
 
 const Skeleton = ({ userId, handleLogin, handleLogout }) => {
+  const [game, setGame] = useState({});
   getRandomGame()
-    .then((game) => {
-      console.log(game)
-      getBets(game["id"])
+    .then((gameJSON) => {
+      console.log(gameJSON)
+      setGame(gameJSON)
+      getBets(gameJSON["id"])
         .then((bets) => console.log(bets))
     })
 
