@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { GoogleOAuthProvider, GoogleLogin, googleLogout } from "@react-oauth/google";
 
 import "../../utilities.css";
@@ -12,13 +12,18 @@ const GOOGLE_CLIENT_ID = "575558179875-rgo4ik0dami2mu3mb48gh9s761gpf0s6.apps.goo
 
 const Skeleton = ({ userId, handleLogin, handleLogout }) => {
     const [game, setGame] = useState(undefined);
-    getRandomGame()
-        .then((gameJSON) => {
-            console.log(gameJSON)
-            setGame(gameJSON)
-            getBets(gameJSON["id"])
-                .then((bets) => console.log(bets))
-        })
+    console.log("Created Skeleton")
+    useEffect(() => {
+        console.log("Fetching game data");
+        getRandomGame()
+            .then((gameJSON) => {
+                console.log(gameJSON);
+                setGame(gameJSON);
+                return getBets(gameJSON["id"]);
+            })
+            .then((bets) => console.log(bets))
+            .catch((error) => console.error("Failed to fetch game or bets", error));
+    }, []);
 
     return (
         <div>
